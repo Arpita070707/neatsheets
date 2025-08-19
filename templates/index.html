@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeatSheets - Clean Data, Better Results</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts - Inter for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container-fluid">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            Clean data,<br>
+                            <span class="gradient-text">better results</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            Transform messy spreadsheets into clean datasets. 
+                            Simple, fast, effective.
+                        </p>
+                        
+                        <!-- Upload Section -->
+                        <div class="upload-section">
+                            <form id="uploadForm" enctype="multipart/form-data" class="upload-form">
+                                <div class="file-input-wrapper">
+                                    <input type="file" class="file-input" id="csvFile" name="csv_file" accept=".csv" required>
+                                    <label for="csvFile" class="file-input-label">
+                                        <i class="bi bi-cloud-upload"></i>
+                                        <span>Choose CSV file</span>
+                                    </label>
+                                </div>
+                                <button type="submit" class="cta-button">
+                                    <i class="bi bi-play"></i>
+                                    Start Cleaning
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Sidebar -->
+                <div class="col-lg-4">
+                    <div class="sidebar-content">
+                        <div class="sidebar-logo">
+                            <i class="bi bi-file-earmark-spreadsheet"></i>
+                        </div>
+                        <div class="sidebar-text">
+                            <span>Neat</span>
+                            <span>Sheets</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dataset Summary -->
+        <div id="datasetSummary" class="summary-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">Dataset Overview</h2>
+                    <div id="summaryContent" class="summary-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cleaning Operations -->
+        <div id="cleaningOperations" class="operations-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">Cleaning Tools</h2>
+                    <div class="operations-grid">
+                        <button class="operation-button" onclick="performCleaning('remove_duplicates')">
+                            <i class="bi bi-trash"></i>
+                            <span>Remove Duplicates</span>
+                        </button>
+                        
+                        <div class="dropdown">
+                            <button class="operation-button dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-funnel"></i>
+                                <span>Fill Missing Values</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#" onclick="performCleaning('fill_missing', 'mean')">Mean</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="performCleaning('fill_missing', 'median')">Median</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="performCleaning('fill_missing', 'mode')">Mode</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dropdown">
+                            <button class="operation-button dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-columns-gap"></i>
+                                <span>Drop High Missing</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#" onclick="performCleaning('drop_high_missing', 0.3)">>30% Missing</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="performCleaning('drop_high_missing', 0.5)">>50% Missing</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="performCleaning('drop_high_missing', 0.7)">>70% Missing</a></li>
+                            </ul>
+                        </div>
+                        
+                        <button class="operation-button" onclick="performCleaning('remove_special_chars')">
+                            <i class="bi bi-textarea-t"></i>
+                            <span>Remove Special Chars</span>
+                        </button>
+                        
+                        <button class="operation-button" onclick="performCleaning('convert_types')">
+                            <i class="bi bi-arrow-repeat"></i>
+                            <span>Convert Types</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="resultsContainer" class="results-container">
+            <!-- Welcome Message -->
+            <div class="welcome-message">
+                <div class="welcome-icon">
+                    <i class="bi bi-file-earmark-spreadsheet"></i>
+                </div>
+                <h3>Welcome to NeatSheets</h3>
+                <p>Upload a CSV file to get started</p>
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div id="controlButtons" class="control-buttons" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <button id="resetBtn" class="control-button secondary">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        reset
+                    </button>
+                    <button id="downloadBtn" class="control-button primary">
+                        <i class="bi bi-download"></i>
+                        Download Cleaned Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
