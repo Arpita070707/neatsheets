@@ -1,204 +1,200 @@
-# Cleaner CSV App
+# 🧹📊 NeatSheets  
 
-A professional, modern web application for cleaning and preprocessing CSV datasets with an intuitive dark-themed interface.
-
-## Features
-
-### 🚀 **Core Functionality**
-- **CSV Upload & Analysis**: Upload CSV files and get instant dataset summaries
-- **Professional Data Cleaning**: Multiple cleaning operations with before/after comparisons
-- **Real-time Processing**: AJAX-based operations without page refreshes
-- **Session Management**: Maintain dataset state across operations
-
-### 🧹 **Cleaning Operations**
-- **Remove Duplicates**: Eliminate duplicate rows from your dataset
-- **Fill Missing Values**: Choose from mean, median, or mode strategies
-- **Drop High Missing Columns**: Remove columns with excessive missing data (30%, 50%, 70% thresholds)
-- **Remove Special Characters**: Clean text data while preserving readability
-- **Convert Data Types**: Automatic data type optimization for better performance
-
-### 🎨 **User Interface**
-- **Dark Theme**: Modern, professional dark interface
-- **Responsive Design**: Works seamlessly on all device sizes
-- **Bootstrap 5**: Built with the latest Bootstrap framework
-- **Interactive Elements**: Hover effects, animations, and smooth transitions
-- **Real-time Feedback**: Loading indicators and success/error messages
-
-## Installation & Setup
-
-### Prerequisites
-- Python 3.8 or higher
-- pip (Python package installer)
-
-### 1. Clone or Download
-```bash
-# If using git
-git clone <repository-url>
-cd cleaner_csv_app
-
-# Or simply download and extract the files
-```
-
-### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Run the Application
-```bash
-python app.py
-```
-
-### 4. Access the App
-Open your browser and navigate to: `http://localhost:5000`
-
-## Usage Guide
-
-### Step 1: Upload CSV File
-1. Click "Choose File" and select your CSV file
-2. Click "Upload & Analyze" to process the file
-3. View the initial dataset summary (rows, columns, missing values, etc.)
-
-### Step 2: Perform Cleaning Operations
-- **Remove Duplicates**: Click the button to eliminate duplicate rows
-- **Fill Missing Values**: Choose from dropdown options (mean, median, mode)
-- **Drop High Missing Columns**: Select threshold and remove problematic columns
-- **Remove Special Characters**: Clean text data automatically
-- **Convert Data Types**: Optimize data types for better performance
-
-### Step 3: Monitor Progress
-- Each operation shows detailed before/after comparisons
-- Dataset summary updates in real-time
-- View cleaning history and results
-
-### Step 4: Download Results
-- Click "Download Cleaned CSV" to get your processed dataset
-- Use "Reset" button to return to the original dataset
-
-## Technical Architecture
-
-### Backend (Flask)
-- **Flask Framework**: Lightweight, flexible web framework
-- **Pandas Integration**: Powerful data manipulation and analysis
-- **Session Management**: Maintain dataset state across requests
-- **RESTful API**: Clean, organized endpoint structure
-
-### Frontend (HTML/CSS/JavaScript)
-- **Bootstrap 5**: Modern, responsive CSS framework
-- **Vanilla JavaScript**: ES6+ features with async/await
-- **AJAX Communication**: Seamless backend integration
-- **Responsive Design**: Mobile-first approach
-
-### Data Processing
-- **DataCleaner Class**: Modular, extensible cleaning operations
-- **Memory Optimization**: Efficient data handling for large datasets
-- **Error Handling**: Robust error management and user feedback
-
-## File Structure
-
-```
-cleaner_csv_app/
-│── app.py                 # Main Flask application
-│── requirements.txt       # Python dependencies
-│── README.md             # This file
-│── utils/
-│   └── data_cleaner.py  # Data cleaning logic
-│── templates/
-│   └── index.html        # Main HTML template
-│── static/
-│   ├── css/
-│   │   └── style.css     # Custom dark theme styles
-│   ├── js/
-│   │   └── script.js     # Frontend JavaScript logic
-│   └── images/           # Application images
-│── uploads/              # Temporary file storage
-└── cleaned/              # Processed file storage
-```
-
-## API Endpoints
-
-### File Operations
-- `POST /upload` - Upload and analyze CSV file
-- `POST /api/download` - Download cleaned CSV file
-
-### Data Cleaning
-- `POST /api/clean` - Perform cleaning operations
-- `GET /api/summary` - Get current dataset summary
-- `POST /api/reset` - Reset to original dataset
-
-### Legacy Support
-- `POST /clean` - Original cleaning endpoint (backward compatibility)
-
-## Customization
-
-### Adding New Cleaning Operations
-1. Extend the `DataCleaner` class in `utils/data_cleaner.py`
-2. Add corresponding API endpoint in `app.py`
-3. Update frontend JavaScript in `static/js/script.js`
-4. Add UI elements in `templates/index.html`
-
-### Styling Changes
-- Modify `static/css/style.css` for custom themes
-- Update Bootstrap classes in HTML for layout changes
-- Customize color variables in CSS `:root` section
-
-## Browser Support
-
-- **Chrome**: 90+ (Recommended)
-- **Firefox**: 88+
-- **Safari**: 14+
-- **Edge**: 90+
-
-## Performance Considerations
-
-- **Large Files**: Optimized for datasets up to 100MB
-- **Memory Usage**: Efficient pandas operations with minimal memory overhead
-- **Session Storage**: In-memory storage (consider Redis for production)
-
-## Security Features
-
-- **File Validation**: Strict CSV file type checking
-- **Session Management**: Secure session handling
-- **Input Sanitization**: Safe data processing
-
-## Troubleshooting
-
-### Common Issues
-
-**File Upload Fails**
-- Ensure file is valid CSV format
-- Check file size (recommended < 100MB)
-- Verify file encoding (UTF-8 recommended)
-
-**Cleaning Operations Not Working**
-- Refresh page and re-upload file
-- Check browser console for JavaScript errors
-- Verify all dependencies are installed
-
-**Performance Issues**
-- Close other browser tabs
-- Use smaller datasets for testing
-- Check available system memory
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Support
-
-For issues, questions, or contributions:
-- Create an issue in the repository
-- Contact the development team
-- Check the troubleshooting section above
+**Clean data, better results** — Transform messy spreadsheets into clean, analysis-ready datasets with this simple, fast, and effective web application.  
 
 ---
 
-**Built with ❤️ using Flask, Pandas, and Bootstrap**
+## 🚀 What is NeatSheets?  
+
+NeatSheets is a web-based **data cleaning tool** that helps you transform messy CSV files into clean, analysis-ready datasets.  
+Built with **Flask** and **Python**, it provides an intuitive interface for common data cleaning operations — without requiring coding knowledge.  
+
+---
+
+## ✨ Features  
+
+### 🔍 Smart Data Analysis  
+- **Dataset Overview** → Get instant insights into your data structure  
+- **Missing Value Detection** → Identify columns with missing data  
+- **Data Type Analysis** → Understand your column types automatically  
+- **Memory Usage Tracking** → Monitor dataset size and optimization  
+
+### 🧹 Cleaning Operations  
+- **Remove Duplicates** → Eliminate duplicate rows  
+- **Fill Missing Values** → Choose from strategies:  
+  - Mean (numeric columns)  
+  - Median (numeric columns)  
+  - Mode (categorical columns)  
+- **Drop High Missing Columns** → Remove columns with excessive missing data 
+- **Remove Special Characters** → Clean text while preserving readability  
+- **Convert Data Types** → Automatically optimize data types for performance  
+
+### 💾 Session Management  
+- **Persistent Sessions** → Work with data across multiple operations  
+- **Operation History** → Track all cleaning steps applied  
+- **Reset Functionality** → Revert to original dataset anytime  
+- **Download Cleaned Data** → Export cleaned dataset as CSV  
+
+---
+
+## 🛠️ Technology Stack  
+
+- **Backend**: Flask (Python web framework)  
+- **Data Processing**: Pandas, NumPy  
+- **Frontend**: HTML5, CSS3, JavaScript  
+- **File Handling**: Secure file upload utilities  
+
+---
+
+## 📋 Requirements  
+
+- Python 3.7+  
+- Flask 2.3.3  
+- Pandas 2.1.1  
+- NumPy 1.24.3
+
+---
+
+## ⚡ Installation  
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/Arpita070707/neatsheets.git
+cd neatsheets
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the application
+python app.py
+
+# 4. Access in browser
+# Open http://localhost:5000
+```
+
+---
+
+## 📖 Usage Guide
+
+### Step 1: Upload CSV File
+
+```text
+1. Click "Choose File" and select your CSV  
+2. Click "Upload & Analyze"  
+3. View dataset summary (rows, columns, missing values, etc.)  
+```
+
+### Step 2: Review Dataset Summary
+
+```text
+- View rows, columns, and data types  
+- Check missing values and duplicates  
+- Monitor memory usage  
+```
+
+### Step 3: Apply Cleaning Operations
+
+```text
+- Remove Duplicates  
+- Fill Missing Values (Mean / Median / Mode)  
+- Drop High Missing Columns  
+- Remove Special Characters  
+- Convert Data Types  
+```
+
+### Step 4: Download Cleaned Data
+
+```text
+- Click "Download" to get cleaned CSV  
+- All cleaning steps are preserved  
+```
+
+---
+
+## 🔧 API Endpoints
+
+```http
+POST   /upload       → Upload CSV + get dataset summary  
+POST   /api/clean    → Perform cleaning operations  
+GET    /api/summary  → Get dataset summary  
+POST   /api/download → Download cleaned dataset  
+POST   /api/reset    → Reset to original dataset  
+```
+
+---
+
+## 📂 Project Structure
+
+```text
+neatsheets/
+├── app.py                # Main Flask application
+├── requirements.txt      # Python dependencies
+├── start_app.bat         # Windows startup script
+├── static/               # Static assets (CSS, JS, Images)
+├── templates/            # HTML templates
+│   └── index.html        # Main interface
+├── utils/                # Utility modules
+│   └── data_cleaner.py   # Core data cleaning logic
+└── uploads/              # File upload directory
+```
+
+---
+
+## 🎯 Use Cases
+
+* **Data Scientists** → Quick preprocessing before analysis
+* **Business Analysts** → Clean messy Excel/CSV exports
+* **Researchers** → Prepare datasets for statistics
+* **Students** → Learn data cleaning hands-on
+* **Anyone** → Transform messy spreadsheets into clean data
+
+---
+
+## 🔒 Security Notes
+
+* Runs locally on your machine
+* No data sent to external servers
+* Session data stored in memory (cleared on restart)
+* For production: use Redis or a database for session storage
+
+---
+
+## 🔧 Configuration
+
+- **SECRET_KEY**: In `app.py`, replace `app.secret_key` with a strong random value before deploying.
+
+---
+
+## 🚧 Limitations
+
+* Supports **CSV only**
+* File size depends on available memory
+* Session data lost when app restarts
+* Designed for moderate-sized datasets
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! You can:
+
+* Report bugs
+* Suggest new features
+* Improve UI/UX
+* Add new cleaning operations
+* Optimize performance
+
+---
+
+## 🆘 Support
+
+If you face issues:
+
+```text
+1. Check console/logs for errors  
+2. Ensure dependencies are installed  
+3. Verify CSV format is correct  
+4. Check required ports are available  
+```
+
+---
